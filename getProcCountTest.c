@@ -3,7 +3,6 @@
 #include "user.h"
 
 int main(void){
-    int counter = getProcCount();
-    printf(1,"There are %d proccesses\n",counter);
-    exit();
+    printf(1,"There are %d proccesses\n",getProcCount());
+    return 0;
 }
