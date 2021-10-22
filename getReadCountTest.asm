@@ -20,7 +20,7 @@ int main(void)
   11:	51                   	push   %ecx
   12:	83 ec 04             	sub    $0x4,%esp
   15:	e8 21 03 00 00       	call   33b <getReadCount>
-    printf(1, "Number of calling Read from boot time till now are: %d\n", count);
+    printf(1, "Number of calling Read SYSCALL from boot time till now are: %d\n", count);
   1a:	83 ec 04             	sub    $0x4,%esp
   1d:	50                   	push   %eax
   1e:	68 68 07 00 00       	push   $0x768
@@ -621,7 +621,7 @@ printint(int fd, int xx, int base, int sgn)
  382:	31 d2                	xor    %edx,%edx
  384:	89 cf                	mov    %ecx,%edi
  386:	f7 75 c4             	divl   -0x3c(%ebp)
- 389:	0f b6 92 a8 07 00 00 	movzbl 0x7a8(%edx),%edx
+ 389:	0f b6 92 b0 07 00 00 	movzbl 0x7b0(%edx),%edx
  390:	89 45 c0             	mov    %eax,-0x40(%ebp)
  393:	89 d8                	mov    %ebx,%eax
  395:	8d 5b 01             	lea    0x1(%ebx),%ebx
@@ -892,7 +892,7 @@ printf(int fd, const char *fmt, ...)
  581:	8b 5d 08             	mov    0x8(%ebp),%ebx
  584:	eb 1a                	jmp    5a0 <printf+0x1a0>
           s = "(null)";
- 586:	bb a0 07 00 00       	mov    $0x7a0,%ebx
+ 586:	bb a8 07 00 00       	mov    $0x7a8,%ebx
         while(*s != 0){
  58b:	89 75 d4             	mov    %esi,-0x2c(%ebp)
  58e:	b8 28 00 00 00       	mov    $0x28,%eax
@@ -938,7 +938,7 @@ free(void *ap)
 
   bp = (Header*)ap - 1;
   for(p = freep; !(bp > p && bp < p->s.ptr); p = p->s.ptr)
- 5d5:	a1 50 0a 00 00       	mov    0xa50,%eax
+ 5d5:	a1 58 0a 00 00       	mov    0xa58,%eax
 {
  5da:	89 e5                	mov    %esp,%ebp
  5dc:	57                   	push   %edi
@@ -994,7 +994,7 @@ free(void *ap)
 }
  621:	5b                   	pop    %ebx
   freep = p;
- 622:	a3 50 0a 00 00       	mov    %eax,0xa50
+ 622:	a3 58 0a 00 00       	mov    %eax,0xa58
 }
  627:	5e                   	pop    %esi
  628:	5f                   	pop    %edi
@@ -1017,7 +1017,7 @@ free(void *ap)
     p->s.size += bp->s.size;
  647:	03 53 fc             	add    -0x4(%ebx),%edx
   freep = p;
- 64a:	a3 50 0a 00 00       	mov    %eax,0xa50
+ 64a:	a3 58 0a 00 00       	mov    %eax,0xa58
     p->s.size += bp->s.size;
  64f:	89 50 04             	mov    %edx,0x4(%eax)
     p->s.ptr = bp->s.ptr;
@@ -1051,7 +1051,7 @@ malloc(uint nbytes)
   nunits = (nbytes + sizeof(Header) - 1)/sizeof(Header) + 1;
  66d:	8b 45 08             	mov    0x8(%ebp),%eax
   if((prevp = freep) == 0){
- 670:	8b 3d 50 0a 00 00    	mov    0xa50,%edi
+ 670:	8b 3d 58 0a 00 00    	mov    0xa58,%edi
   nunits = (nbytes + sizeof(Header) - 1)/sizeof(Header) + 1;
  676:	8d 70 07             	lea    0x7(%eax),%esi
  679:	c1 ee 03             	shr    $0x3,%esi
@@ -1082,7 +1082,7 @@ malloc(uint nbytes)
  6b2:	8b 4a 04             	mov    0x4(%edx),%ecx
  6b5:	39 f1                	cmp    %esi,%ecx
  6b7:	73 4f                	jae    708 <malloc+0xa8>
- 6b9:	8b 3d 50 0a 00 00    	mov    0xa50,%edi
+ 6b9:	8b 3d 58 0a 00 00    	mov    0xa58,%edi
  6bf:	89 d0                	mov    %edx,%eax
         p->s.size = nunits;
       }
@@ -1108,7 +1108,7 @@ malloc(uint nbytes)
  6e1:	50                   	push   %eax
  6e2:	e8 e9 fe ff ff       	call   5d0 <free>
   return freep;
- 6e7:	a1 50 0a 00 00       	mov    0xa50,%eax
+ 6e7:	a1 58 0a 00 00       	mov    0xa58,%eax
       if((p = morecore(nunits)) == 0)
  6ec:	83 c4 10             	add    $0x10,%esp
  6ef:	85 c0                	test   %eax,%eax
@@ -1140,7 +1140,7 @@ malloc(uint nbytes)
         p->s.size = nunits;
  714:	89 72 04             	mov    %esi,0x4(%edx)
       freep = prevp;
- 717:	a3 50 0a 00 00       	mov    %eax,0xa50
+ 717:	a3 58 0a 00 00       	mov    %eax,0xa58
 }
  71c:	8d 65 f4             	lea    -0xc(%ebp),%esp
       return (void*)(p + 1);
@@ -1154,17 +1154,17 @@ malloc(uint nbytes)
  727:	8d b4 26 00 00 00 00 	lea    0x0(%esi,%eiz,1),%esi
  72e:	66 90                	xchg   %ax,%ax
     base.s.ptr = freep = prevp = &base;
- 730:	c7 05 50 0a 00 00 54 	movl   $0xa54,0xa50
+ 730:	c7 05 58 0a 00 00 5c 	movl   $0xa5c,0xa58
  737:	0a 00 00 
     base.s.size = 0;
- 73a:	bf 54 0a 00 00       	mov    $0xa54,%edi
+ 73a:	bf 5c 0a 00 00       	mov    $0xa5c,%edi
     base.s.ptr = freep = prevp = &base;
- 73f:	c7 05 54 0a 00 00 54 	movl   $0xa54,0xa54
+ 73f:	c7 05 5c 0a 00 00 5c 	movl   $0xa5c,0xa5c
  746:	0a 00 00 
   for(p = prevp->s.ptr; ; prevp = p, p = p->s.ptr){
  749:	89 f8                	mov    %edi,%eax
     base.s.size = 0;
- 74b:	c7 05 58 0a 00 00 00 	movl   $0x0,0xa58
+ 74b:	c7 05 60 0a 00 00 00 	movl   $0x0,0xa60
  752:	00 00 00 
     if(p->s.size >= nunits){
  755:	e9 36 ff ff ff       	jmp    690 <malloc+0x30>

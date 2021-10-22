@@ -20,7 +20,7 @@ int main(void){
   12:	83 ec 04             	sub    $0x4,%esp
     int count = getProcCount();
   15:	e8 19 03 00 00       	call   333 <getProcCount>
-    printf(1,"Number of processed: %d\n", count);
+    printf(1,"Number of processes: %d\n", count);
   1a:	83 ec 04             	sub    $0x4,%esp
   1d:	50                   	push   %eax
   1e:	68 68 07 00 00       	push   $0x768
