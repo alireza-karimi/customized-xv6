@@ -145,7 +145,7 @@ syscall(void)
   if(num == SYS_read){
     readcount++;
   }
-  if(num == SYS_read){
+  if(num == SYS_getReadCount){
     curproc->readid = readcount;
   }
   //

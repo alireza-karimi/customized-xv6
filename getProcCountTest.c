@@ -4,6 +4,6 @@
 
 int main(void){
     int count = getProcCount();
-    printf(1,"Number of processed: %d\n", count);
+    printf(1,"Number of processes: %d\n", count);
     exit();
 }
