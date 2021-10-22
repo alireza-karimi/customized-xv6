@@ -2017,7 +2017,6 @@ SYSCALL(getProcCount)
      e3a:	c3                   	ret    
 
 00000e3b <getReadCount>:
-SYSCALL(getReadCount)
      e3b:	b8 17 00 00 00       	mov    $0x17,%eax
      e40:	cd 40                	int    $0x40
      e42:	c3                   	ret    

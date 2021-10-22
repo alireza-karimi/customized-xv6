@@ -685,7 +685,6 @@ SYSCALL(getProcCount)
  45a:	c3                   	ret    
 
 0000045b <getReadCount>:
-SYSCALL(getReadCount)
  45b:	b8 17 00 00 00       	mov    $0x17,%eax
  460:	cd 40                	int    $0x40
  462:	c3                   	ret    

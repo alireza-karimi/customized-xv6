@@ -654,7 +654,6 @@ SYSCALL(getProcCount)
  3fa:	c3                   	ret    
 
 000003fb <getReadCount>:
-SYSCALL(getReadCount)
  3fb:	b8 17 00 00 00       	mov    $0x17,%eax
  400:	cd 40                	int    $0x40
  402:	c3                   	ret    
