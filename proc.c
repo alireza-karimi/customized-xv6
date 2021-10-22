@@ -538,9 +538,3 @@ int
 getProcCount(void){
   return 1;
 }
-
-
-int
-getProcCount(void){
-  return 2;
-}

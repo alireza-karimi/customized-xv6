@@ -1,8 +1,8 @@
-#include <types.h>
-#include <user.h>
-#include <stat.h>
+#include "types.h"
+#include"user.h"
+#include "stat.h"
 
 int main(void){
-    printf("Number of calling Read from boot time till now are: %d", getReadCount());
+    printf(1, "Number of calling Read from boot time till now are: %d", getReadCount());
     return 0;
 }
