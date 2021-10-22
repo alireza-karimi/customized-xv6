@@ -536,11 +536,11 @@ procdump(void)
 
 int
 getProcCount(void){
-  printk("Hello World!");
+  return 1;
 }
 
 
 int
 getProcCount(void){
-  printk("Hello World 2!");
+  return 2;
 }
