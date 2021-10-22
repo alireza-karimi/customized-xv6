@@ -532,3 +532,15 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+
+int
+getProcCount(void){
+  printk("Hello World!");
+}
+
+
+int
+getProcCount(void){
+  printk("Hello World 2!");
+}
