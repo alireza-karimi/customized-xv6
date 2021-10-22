@@ -120,7 +120,7 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
-
+int             getProcCount(void);
 // swtch.S
 void            swtch(struct context**, struct context*);
 
@@ -155,8 +155,6 @@ int             argstr(int, char**);
 int             fetchint(uint, int*);
 int             fetchstr(uint, char**);
 void            syscall(void);
-int             getProcCount(void);
-int             getReadCount(void);
 
 // timer.c
 void            timerinit(void);

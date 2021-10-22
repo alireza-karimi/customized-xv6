@@ -89,3 +89,17 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//return how many processes at the time
+int
+sys_getProcCount(void)
+{
+  return getProcCount();
+}
+
+//return how many times the read system call have been called
+int 
+sys_getReadCount(void)
+{
+  return myproc()->readid;
+}

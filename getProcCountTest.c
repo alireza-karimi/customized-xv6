@@ -1,8 +1,9 @@
 #include "types.h"
-#include"user.h"
 #include "stat.h"
+#include "user.h"
 
 int main(void){
-    printf(1, "Number of processes are: %d", getProcCount());
-    return 0;
+    int counter = getProcCount();
+    printf(1,"There are %d proccesses\n",counter);
+    exit();
 }

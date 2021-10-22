@@ -75,6 +75,7 @@ allocproc(void)
 {
   struct proc *p;
   char *sp;
+  //p->readid = 0;
 
   acquire(&ptable.lock);
 
@@ -533,8 +534,20 @@ procdump(void)
   }
 }
 
+int 
+getProcCount(void)
+{
+  struct proc *p;
 
-int
-getProcCount(void){
-  return 1;
+  acquire(&ptable.lock);
+  int count = 0;
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+    if (p->state != UNUSED)
+    {
+      count++;
+    }
+  }
+  release(&ptable.lock);
+  return count;
 }
