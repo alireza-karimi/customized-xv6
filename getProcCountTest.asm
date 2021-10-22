@@ -18,9 +18,9 @@ int main(void){
    f:	89 e5                	mov    %esp,%ebp
   11:	51                   	push   %ecx
   12:	83 ec 04             	sub    $0x4,%esp
-    int counter = getProcCount();
+    int count = getProcCount();
   15:	e8 19 03 00 00       	call   333 <getProcCount>
-    printf(1,"There are %d proccesses\n",counter);
+    printf(1,"Number of processed: %d", count);
   1a:	83 ec 04             	sub    $0x4,%esp
   1d:	50                   	push   %eax
   1e:	68 68 07 00 00       	push   $0x768
@@ -892,7 +892,7 @@ printf(int fd, const char *fmt, ...)
  581:	8b 5d 08             	mov    0x8(%ebp),%ebx
  584:	eb 1a                	jmp    5a0 <printf+0x1a0>
           s = "(null)";
- 586:	bb 81 07 00 00       	mov    $0x781,%ebx
+ 586:	bb 80 07 00 00       	mov    $0x780,%ebx
         while(*s != 0){
  58b:	89 75 d4             	mov    %esi,-0x2c(%ebp)
  58e:	b8 28 00 00 00       	mov    $0x28,%eax

@@ -10,7 +10,7 @@ Disassembly of section .text:
 #include "user.h"
 
 int main(void)
-{
+{   int count = getReadCount();
    0:	f3 0f 1e fb          	endbr32 
    4:	8d 4c 24 04          	lea    0x4(%esp),%ecx
    8:	83 e4 f0             	and    $0xfffffff0,%esp
@@ -19,9 +19,8 @@ int main(void)
    f:	89 e5                	mov    %esp,%ebp
   11:	51                   	push   %ecx
   12:	83 ec 04             	sub    $0x4,%esp
-    int count = getReadCount();
   15:	e8 21 03 00 00       	call   33b <getReadCount>
-    printf(1,"There have been %d times from calling read system call\n",count);
+    printf(1, "Number of calling Read from boot time till now are: %d", count);
   1a:	83 ec 04             	sub    $0x4,%esp
   1d:	50                   	push   %eax
   1e:	68 68 07 00 00       	push   $0x768
@@ -893,7 +892,7 @@ printf(int fd, const char *fmt, ...)
  581:	8b 5d 08             	mov    0x8(%ebp),%ebx
  584:	eb 1a                	jmp    5a0 <printf+0x1a0>
           s = "(null)";
- 586:	bb a0 07 00 00       	mov    $0x7a0,%ebx
+ 586:	bb 9f 07 00 00       	mov    $0x79f,%ebx
         while(*s != 0){
  58b:	89 75 d4             	mov    %esi,-0x2c(%ebp)
  58e:	b8 28 00 00 00       	mov    $0x28,%eax

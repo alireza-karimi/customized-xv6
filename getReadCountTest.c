@@ -3,7 +3,7 @@
 #include "user.h"
 
 int main(void)
-{
-    printf(1, "Number of calling Read from boot time till now are: %d", getReadCount());
+{   int count = getReadCount();
+    printf(1, "Number of calling Read from boot time till now are: %d\n", count);
     exit();
 }
