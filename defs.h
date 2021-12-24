@@ -157,6 +157,8 @@ int             fetchstr(uint, char**);
 void            syscall(void);
 int             getProcCount(void);
 int             getReadCount(void);
+int             clone(void*);
+int             join(void);
 
 // timer.c
 void            timerinit(void);

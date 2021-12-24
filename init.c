@@ -5,12 +5,31 @@
 #include "user.h"
 #include "fcntl.h"
 
+#define PAGESIZE 4096
+
 char *argv[] = { "sh", 0 };
 
 int
 main(void)
 {
-  int pid, wpid;
+  int thread_id, jpid;
+
+  void *fptr = malloc(2 * PAGESIZE);
+  void *stack;
+
+  if(fptr == 0){
+    return -1;
+  }
+
+  int mod = (uint)fptr % PAGESIZE;
+
+  if(mod == 0){
+    stack = fptr;
+  }
+  else{
+    stack = fptr + (PAGESIZE - mod);
+  }
+
 
   if(open("console", O_RDWR) < 0){
     mknod("console", 1, 1);
@@ -21,17 +40,17 @@ main(void)
 
   for(;;){
     printf(1, "init: starting sh\n");
-    pid = fork();
-    if(pid < 0){
-      printf(1, "init: fork failed\n");
+    thread_id = clone((void*)stack);
+    if(thread_id < 0){
+      printf(1, "init: thread_create failed\n");
       exit();
     }
-    if(pid == 0){
+    if(thread_id == 0){
       exec("sh", argv);
       printf(1, "init: exec sh failed\n");
       exit();
     }
-    while((wpid=wait()) >= 0 && wpid != pid)
+    while((jpid=join()) >= 0 && jpid != thread_id)
       printf(1, "zombie!\n");
   }
 }

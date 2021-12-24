@@ -103,3 +103,22 @@ sys_getReadCount(void)
 {
   return myproc()->readid;
 }
+
+
+int 
+sys_clone(void)
+{
+  int stackptr = 0;
+  if(argint(0, &stackptr) < 0){
+    return -1;
+  }
+  else
+    return clone((void*) stackptr);
+}
+
+
+int 
+sys_join(void)
+{
+  return join();
+}

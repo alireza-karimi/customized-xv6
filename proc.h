@@ -50,6 +50,8 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
   int readid;                  // keep the number of read system call till now
+  int stackTop;                // stack top
+  int threads;                 // number of threads that use same pgdir
 };
 
 // Process memory is laid out contiguously, low addresses first:
